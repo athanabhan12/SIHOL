@@ -25,7 +25,7 @@
 
 </head>
 <body>
-	<div class="">
+	<div class="wrapper">
 		<!--
 			Tip 1: You can change the background color of the main header using: data-background-color="blue | purple | light-blue | green | orange | red"
 		-->
@@ -59,7 +59,7 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
-									<i class="fa-solid fa-user fa-2x" style="color: white"></i>
+									<i class="fa-solid fa-user fa-2x" style="color: black;"></i>
 								</div>
 							</a>
 							<ul class="dropdown-menu dropdown-user animated fadeIn">

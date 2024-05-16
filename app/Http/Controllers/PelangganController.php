@@ -25,14 +25,17 @@ class PelangganController extends Controller
      */
     public function index(Request $request)
     {
-        $user = auth()->user(); // Mendapatkan data user yang login 
+        $user = auth()->user();
         // echo"<pre>";
-        // var_dump($user);die();
-        $data_tour_raw = DB::select("CALL sp_data_tours($user->id)");
-        $data_tour = $data_tour_raw[0];
-        $pelanggans = DB::select("CALL sp_datatable_peserta_tour($data_tour->id)");
-        // echo"<pre>";
-        // print_r($pelanggans);die();
+        // print_r($data_tour_raw);die();
+        if ($user->id_role == 1) {
+            $pelanggans = DB::select("CALL sp_datatable_peserta_tour(0)");
+        } else {
+            $data_tour_raw = DB::select("CALL sp_data_tours($user->id)");
+            $data_tour = $data_tour_raw[0];
+
+            $pelanggans = DB::select("CALL sp_datatable_peserta_tour($data_tour->id)");
+        }
         return view('pelanggan', compact('pelanggans'));
     }
     public function cetak_tiket()
@@ -159,7 +162,7 @@ class PelangganController extends Controller
 		Excel::import(new ImportPesertaTourClass, public_path('/file_peserta/'.$nama_file));
  
 		// alihkan halaman kembali
-		return redirect('/pelanggan');
+		return redirect('/tour');
 	}
 
 
@@ -172,13 +175,25 @@ class PelangganController extends Controller
 
     public function pdf() 
     {
-        $peserta = Peserta::all();
+        $user = auth()->user();
+        // echo"<pre>";
+        // print_r($data_tour_raw);die();
+        if ($user->id_role == 1) {
+            $pelanggans = DB::select("CALL sp_datatable_peserta_tour(0)");
+            $pelanggansArray = json_decode(json_encode($pelanggans), true);
+        } else {
+            $data_tour_raw = DB::select("CALL sp_data_tours($user->id)");
+            $data_tour = $data_tour_raw[0];
+
+            $pelanggans = DB::select("CALL sp_datatable_peserta_tour($data_tour->id)");
+            $pelanggansArray = json_decode(json_encode($pelanggans), true);
+        }
         
-        foreach ($peserta as $value) {
+        foreach ($pelanggansArray as $value) {
             // var_dump($value);die;
 
         $this->fpdf->AddPage();
-        $qrcode = new QRcode($value['nama_peserta'] . ' ' . $value['kelas'], 'H'); // error level : L, M, Q, H
+        $qrcode = new QRcode($value['id'] . '|' . $value['nama_peserta'] . '|' . $value['kelas'], 'H'); // error level : L, M, Q, H
         // var_dump($value['nama_peserta']);die;
 
         $this->fpdf->SetFont('helvetica', 'B', 11);
@@ -191,6 +206,9 @@ class PelangganController extends Controller
         $this->fpdf->Ln(0.5);
         $this->fpdf->SetFont('helvetica', 'B', 10);
         $this->fpdf->Cell(0, 5, $value['kelas'], 0, 0, 'C');
+        $this->fpdf->Ln(0.5);
+        $this->fpdf->SetFont('helvetica', 'B', 10);
+        $this->fpdf->Cell(0, 5, $value['id'], 0, 0, 'C');
 
         }
         $this->fpdf->Output();
@@ -198,6 +216,13 @@ class PelangganController extends Controller
 
 
             exit;
+    }
+
+    public function show($id_tour)
+    {
+        $peserta = Peserta::where('id_tour', $id_tour)->get();
+        // var_dump($peserta);die();
+        return view('data_peserta', compact('peserta'));
     }
 
 }

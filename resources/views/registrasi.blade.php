@@ -28,12 +28,18 @@
         <div id="reader" width="600px"></div>
     </div>
       </div>
-      <form action="{{ url('/registrasi/store') }}" method="POST">
+      <form action="{{ url('/registrasi/update') }}" method="POST" id="updateForm">
         @csrf
       <div class="row">
         <div class="col-12 form-control mt-5">
           <input type="text" name="nama_peserta" id="nama_peserta" class="form-control">
+        </div>
       </div>
+      <div class="row">
+        <div class="col-12 form-control mt-5">
+          <input type="text" name="id" id="id" class="form-control" placeholder="ID PESERTA">
+        </div>
+    </div>
       <div class="mt-3 col-12">
         <button class="btn btn-success mt-3" id="konfirmasi" style="display: block; margin-left: auto; margin-right: auto;">SUBMIT</button>
         </div>
@@ -54,7 +60,12 @@
   function onScanSuccess(decodedText, decodedResult) {
   // handle the scanned code as you like, for example:
 //   console.log(`Code matched = ${decodedText}`, decodedResult);
-$('#nama_peserta').val(decodedText);
+// alert(decodedText);
+let id = decodedText.split("|")[0];
+let nama_peserta = decodedText.split("|")[1];
+
+$('#id').val(id);
+$('#nama_peserta').val(nama_peserta);
 
   }
 
@@ -71,46 +82,14 @@ let html5QrcodeScanner = new Html5QrcodeScanner(
   /* verbose= */ false);
 html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 
-// let id = decodedText
-  
-//   csrf_token = $('meta[name="csrf-token"]').attr('content');
 
-// 	Swal.fire({
-// 	  title : 'contoh',
-// 	  text : 'contoh1',
-// 	  type : 'warning',
-// 	  showCancelButton : true,
-// 	  confirmbuttonColor : '#3085d6',
-// 	  cancelButtonColor : '#d33',
-// 	  confirmButtonText : 'contoh2' 
-// 	}).then((result) => {
-// 		if(result.value){
-// 		  $.ajax({
-// 			url : "{{ route('qrcode') }}",
-// 			type : 'POST',
-// 			data : {
-// 				'_method' : 'DELETE',
-// 				'_token'  : csrf_token,
-// 				'qr_code' : id
-// 			},
-// 			success: function(response){
-// 			  Swal.fire({
-// 				icon  : 'success',
-// 				type  : 'success',
-// 				title : 'success',
-// 				text  : 'contoh3'
-// 			  });
-// 			},
-// 			error: function(xhr){
-// 			  Swal.fire({
-// 				type  :'error',
-// 				title : 'contoh4',
-// 				text  :'contoh5'
-// 			  })
-// 			}
-// 		  })
-// 		}
-//   })
+document.getElementById('updateForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Mencegah form dikirimkan secara default
+    var form = event.target;
+    var idValue = form.querySelector('input[name="id"]').value;
+    form.action = form.action + '/' + idValue;
+    form.submit(); // Kirimkan form setelah action diubah
+});
 
 
 

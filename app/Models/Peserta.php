@@ -12,6 +12,7 @@ class Peserta extends Model
 
 
     protected $fillable = [
+        'id_tour',
         'nama_peserta',
         'no_telepon',
         'kelas',

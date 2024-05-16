@@ -32,8 +32,8 @@
               <a href="{{ url('pelanggan/pdf') }}" target="_blank" class="btn btn-danger" style="float: right;"><i class="fa-regular fa-file-pdf mr-2"></i>Export PDF</a>
 
               <!-- Import Excel -->
-		   <div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  	<div class="modal-dialog" role="document">
+		<div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
 				<form method="post" action="{{ url('/pelanggan/import') }}" enctype="multipart/form-data">
 					<div class="modal-content"> 
 						<div class="modal-header">
@@ -55,8 +55,10 @@
 						</div>
 					</div>
 				</form>
-			  </div>
-		   </div>   
+			</div>
+		</div>
+
+              
             </div>
           </div>
             <div class="card-body">
@@ -69,13 +71,13 @@
                     <th class="text-center">Nama Lengkap</th>
                     <th>No.Telepon</th>
                     <th>No Bus/Kendaraan</th>
-                    <th>Tanggal Berangkat</th>
+                    <th>Kelas</th>
                     <th>ACTION</th>
                     </tr>
                   </thead>
                   <tbody>
 
-                    @foreach ($pelanggans as $pelanggan)
+                    @foreach ($peserta as $pelanggan)
                         
                     <tr style="text-align: center;">
                         <td>{{ $loop->iteration }}</td>
@@ -87,7 +89,7 @@
                         <td>{{ $pelanggan->nama_peserta }}</td>
                         <td>{{ $pelanggan->no_telepon }}</td>
                         <td>{{ $pelanggan->no_bus_kendaraan }}</td>
-                        <td>{{ $pelanggan->tgl_berangkat_tour }}</td>
+                        <td>{{ $pelanggan->kelas }}</td>
                         {{-- <td>{{ \App\Library\helper::format_date_ind($pelanggan->tgl_berangkat_tour) }}</td> --}}
                         <td>
 

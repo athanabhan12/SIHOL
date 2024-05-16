@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use app\Models\Peserta;
 use App\Models\Kehadiran;
+use Illuminate\Support\Facades\DB;
 
 class RegistrasiController extends Controller
 {
@@ -104,7 +105,8 @@ class RegistrasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pelanggans = DB::select("CALL sp_register($id)"); 
+        return redirect('registrasi')->with('pelanggans', $pelanggans);
     }
 
     /**

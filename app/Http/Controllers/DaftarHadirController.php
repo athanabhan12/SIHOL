@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kehadiran;
+use App\Models\Peserta;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class DaftarHadirController extends Controller
@@ -14,8 +16,36 @@ class DaftarHadirController extends Controller
      */
     public function index()
     {
-        $kehadiran = Kehadiran::all();
-        return view('daftar_hadir',compact('kehadiran'));
+        $user = auth()->user();
+        // echo"<pre>";
+        // print_r($data_tour_raw);die();
+        if ($user->id_role == 1) {
+            $pelanggans = DB::select("CALL sp_datatable_peserta_tour(0)");
+        } else {
+            $data_tour_raw = DB::select("CALL sp_data_tours($user->id)");
+            $data_tour = $data_tour_raw[0];
+
+            // var_dump($data_tour->id);die;
+            $pelanggans = DB::select("CALL sp_datatable_peserta_tour($data_tour->id)");
+        }
+
+        $jumlah_hadir =0;
+        $belum_hadir =0;
+
+        $pelanggansArray = json_decode(json_encode($pelanggans), true);
+
+        foreach ($pelanggansArray as $value) {
+            if ($value['status_hadir'] == 1) {
+                $jumlah_hadir += 1;
+            } else {
+                $belum_hadir += 1;
+            }
+        }
+
+        $count_pelanggan = DB::select("CALL sp_count_daftar_hadir($data_tour->id)");
+        // var_dump($jumlah_hadir);die();
+
+        return view('daftar_hadir',compact('pelanggans','count_pelanggan', 'jumlah_hadir', 'belum_hadir'));
     }
 
     /**

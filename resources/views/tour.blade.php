@@ -60,10 +60,7 @@
                                 <a href="{{ url('tour/delete') }}/{{$data_tour->id}}">
                                 <button type="button" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
                               </a> 
-                                <a href="{{ url('tour/detail') }}/{{$data_tour->id}}">
-                                <button type="button" class="btn btn-success"><i class="fa-solid fa-people-group"></i></button>
-                              </a>    
-
+                              <a href="{{ url('pelanggan/show') }}/{{$data_tour->id}}" class="btn btn-success"><i class="fa-solid fa-people-group"></i></a>
                         </td>
                     </tr>
 

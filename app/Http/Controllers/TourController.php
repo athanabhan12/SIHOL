@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataTour;
+use App\Models\Peserta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,9 +17,12 @@ class TourController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $data_tour_raw = DB::select("CALL sp_tour($user->id)");
-        $data_tour = $data_tour_raw[0];
-        $data_tours = DB::select("CALL sp_data_tours($data_tour->id)");
+        if ($user->id_role == 1) {
+            $data_tours = DB::select("CALL sp_data_tour(0)");
+        } else {
+
+            $data_tours = DB::select("CALL sp_data_tour($user->id)");
+        }
 
         return view('tour',compact('data_tours'));
     }
@@ -30,7 +34,7 @@ class TourController extends Controller
      */
     public function create()
     {
-        return view('tambah_tour', compact('data_tours'));   
+        return view('tambah_tour');   
     }
 
     /**
@@ -51,6 +55,8 @@ class TourController extends Controller
         $data_tours->destinasi_tour                  = $request->destinasi_tour;
         $data_tours->rombongan_tour                  = $request->rombongan_tour;
         $data_tours->jumlah_peserta_tour             = $request->jumlah_peserta_tour;
+        $data_tours->jenis_kendaraan_tour            = $request->jenis_kendaraan_tour;
+        $data_tours->jumlah_kendaraan                = $request->jumlah_kendaraan;
         $data_tours->save();
          
         return redirect('tour');
@@ -62,9 +68,9 @@ class TourController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_tour)
     {
-        //
+       
     }
 
     /**
@@ -75,7 +81,8 @@ class TourController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tour = DataTour::whereId($id)->first();
+        return view('edit_tour')->with('tour', $tour);
     }
 
     /**
@@ -87,7 +94,18 @@ class TourController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tour                                  = DataTour::find($id);
+        $tour->nama_tour                       = $request->nama_tour;
+        $tour->tgl_berangkat_tour              = $request->tgl_berangkat_tour;
+        $tour->tgl_selesai_tour                = $request->tgl_selesai_tour;
+        $tour->destinasi_tour                  = $request->destinasi_tour;
+        $tour->rombongan_tour                  = $request->rombongan_tour;
+        $tour->jumlah_peserta_tour             = $request->jumlah_peserta_tour;
+        $tour->jenis_kendaraan_tour            = $request->jenis_kendaraan_tour;
+        $tour->jumlah_kendaraan                = $request->jumlah_kendaraan;
+        $tour->save();
+        
+        return redirect('tour');
     }
 
     /**

@@ -14,13 +14,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $dataToursWithParticipantsCount = DataTour::withCount('peserta')->get();
-
-foreach ($dataToursWithParticipantsCount as $dataTour) {
-    echo "ID Tour: " . $dataTour->id_tour . ", Jumlah Peserta: " . $dataTour->pesertas_count . "\n";
-}
-
-        return view('dashboard');
+        $data_tour = DataTour::all();
+        return view('dashboard', compact('data_tour'));
     }
 
     /**

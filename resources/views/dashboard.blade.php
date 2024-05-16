@@ -9,6 +9,7 @@
 						<h4 class="page-title">Dashboard</h4>
 					</div>
 					<div class="row">
+						@foreach($data_tour as $data_tours)
 						<div class="col-sm-12 col-md-3">
 							<div class="card card-stats card-round">
 								<div class="card-body ">
@@ -20,71 +21,15 @@
 										</div>
 										<div class="col col-stats ml-3 ml-sm-0">
 											<div class="numbers">
-												<p class="card-category">Peserta</p>
-												<h4 class="card-title">100</h4>
+												<p class="card-category">{{ $data_tours->nama_tour }}</p>
+												<h4 class="card-title">{{ $data_tours->jumlah_peserta_tour }}</h4>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-12 col-md-3">
-							<div class="card card-stats card-round">
-								<div class="card-body ">
-									<div class="row align-items-center">
-										<div class="col-icon">
-											<div class="icon-big text-center icon-primary bubble-shadow-small">
-												<i class="fas fa-users"></i>
-											</div>
-										</div>
-										<div class="col col-stats ml-3 ml-sm-0">
-											<div class="numbers">
-												<p class="card-category">Peserta</p>
-												<h4 class="card-title">100</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-12 col-md-3">
-							<div class="card card-stats card-round">
-								<div class="card-body ">
-									<div class="row align-items-center">
-										<div class="col-icon">
-											<div class="icon-big text-center icon-primary bubble-shadow-small">
-												<i class="fas fa-users"></i>
-											</div>
-										</div>
-										<div class="col col-stats ml-3 ml-sm-0">
-											<div class="numbers">
-												<p class="card-category">Peserta</p>
-												<h4 class="card-title">100</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-12 col-md-3">
-							<div class="card card-stats card-round">
-								<div class="card-body ">
-									<div class="row align-items-center">
-										<div class="col-icon">
-											<div class="icon-big text-center icon-primary bubble-shadow-small">
-												<i class="fas fa-users"></i>
-											</div>
-										</div>
-										<div class="col col-stats ml-3 ml-sm-0">
-											<div class="numbers">
-												<p class="card-category">Peserta</p>
-												<h4 class="card-title">100</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						@endforeach
 					</div>
 				</div>
 			</div>

@@ -47,18 +47,9 @@ Route::get('/redirect', [RedirectController::class, 'cek']);
 
 // untuk superadmin
 Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
-Route::get('/dashboard',                          [DashboardController::class, 'index'])->name('index');
-Route::get('/admin',                              [DashboardController::class, 'index'])->name('admin');
+Route::get('/index',                              [AdminController::class, 'index'])->name('index');
+Route::get('/admin',                              [AdminController::class, 'index'])->name('admin');
 Route::get('/dashboard',                          [DashboardController::class, 'index'])->name('dashboard');
-
-Route::get('/registrasi',                         [RegistrasiController::class,'index'])->name('registrasi');
-Route::post('/registrasi/store',                   [RegistrasiController::class,'store'])
-;
-Route::post('valdasi/qrcode',                     [RegistrasiController::class,'qrcode'])->name('qrcode');
-Route::get('/registrasi/scan/{id}',               [RegistrasiController::class,'scan']);
-Route::get('registrasi/detailscan',               [RegistrasiController::class,'detailscan'])->name('detailscan');
-Route::get('/scan',                               [RegistrasiController::class,'handlescan'])->name('scan');
-
 
 Route::get('/laporan_peserta',                    [LaporanController::class,'index_peserta'])->name('laporan_peserta');
 Route::get('/laporan_data_tour',                  [LaporanController::class,'index_data_tour'])->name('laporan_data_tour');
@@ -90,7 +81,7 @@ Route::post('/tour/store',                        [TourController::class,'store'
 Route::get('/tour/edit/{id}',                     [TourController::class,'edit']);
 Route::post('/tour/update/{id}',                  [TourController::class,'update']);
 Route::get('/tour/delete/{id}',                   [TourController::class,'delete']);
-Route::get('/tour/detail/{id}',                   [TourController::class,'detail']);
+Route::get('/tour/show/{id_tour}',                [TourController::class,'show']);
 Route::get('/daftar_hadir',                       [DaftarHadirController::class,'index'])->name('daftar_hadir');
 
 });
@@ -116,6 +107,17 @@ Route::get('/pelanggan/delete/{id}',              [PelangganController::class,'d
 Route::get('/pelanggan/detail/{id}',              [PelangganController::class,'detail']);
 Route::post('/pelanggan/import',                  [PelangganController::class,'import'])->name('import');
 Route::get('/pelanggan/pdf',                      [PelangganController::class,'pdf'])->name('pdf');
+
+Route::get('/registrasi',                         [RegistrasiController::class,'index'])->name('registrasi');
+Route::post('/registrasi/update/{id}',                 [RegistrasiController::class,'update']);
+
+Route::post('valdasi/qrcode',                     [RegistrasiController::class,'qrcode'])->name('qrcode');
+Route::get('/registrasi/scan/{id}',               [RegistrasiController::class,'scan']);
+Route::get('registrasi/detailscan',               [RegistrasiController::class,'detailscan'])->name('detailscan');
+Route::get('/scan',                               [RegistrasiController::class,'handlescan'])->name('scan');
+
+
+Route::get('/pelanggan/show/{id_tour}', [PelangganController::class, 'show']);
 
 
 

@@ -26,7 +26,8 @@
           <div class="card">
             <div class="card-header">
               <div class="row">
-              
+                <h3><span class="badge badge-success">HADIR</span><span style="color: rgb(62, 207, 0); font-weight: bold; margin-left: 10px;">{{ $jumlah_hadir }}</span></h3>
+                <h3 class="ml-4"><span class="badge badge-danger">BELUM HADIR</span><span style="color: rgb(219, 0, 0); font-weight: bold; margin-left: 10px;">{{ $belum_hadir }}</span></h3>
             </div>
           </div>
             <div class="card-body">
@@ -36,19 +37,43 @@
 
                     <tr>
                     <th>No</th>
-                    <th class="text-center">Infor Peserta</th>
+                    <th class="text-center">Nama Peserta</th>
+                    <th>No.Telepon</th>
+                    <th>No.Peserta Tour</th>
+                    <th>Rombongan Tour</th>
+                    <th>Kelas</th>
+                    <th>No Bus/Kendaraan</th>
+                    <th>Waktu Scan</th>
                     <th>Status Hadir</th>
                     </tr>
 
                   </thead>
                   <tbody>
 
-                    @foreach ($kehadiran as $pelanggan)
+                    @foreach ($pelanggans as $pelanggan)
                         
                     <tr style="text-align: center;">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $pelanggan->nama_peserta }}</td>
-                        <td>HADIR</td>
+                        <td>{{ $pelanggan->no_telepon }}</td>
+                        <td>{{ $pelanggan->no_peserta_tour }}</td>
+                        <td>{{ $pelanggan->rombongan_tour }}</td>
+                        <td>{{ $pelanggan->kelas }}</td>
+                        <td>{{ $pelanggan->no_bus_kendaraan }}</td>
+                        <td>{{ $pelanggan->waktu_scan }}</td>
+                        <td>
+                        <?php
+                        if ($pelanggan->status_hadir == 1) {
+                          ?>
+                          <span class="badge badge-success">Hadir</span>
+                          <?php
+                        } else {
+                          ?>
+                          <span class="badge badge-danger">Belum</span>
+                          <?php
+                        }
+                          ?>
+                        </td>
                     </tr>
 
                     @endforeach

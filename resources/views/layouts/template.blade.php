@@ -34,15 +34,14 @@
 			<!-- Logo Header -->
 			<div class="logo-header" data-background-color="blue">
 				
-				<a href="{{ route('admin') }}" class="logo">
-					{{-- <h1 class="navbar-brand" style="color: white">Siliwangi Holiday</h1> --}}
+				{{-- <a href="{{ route('admin') }}" class="logo">
 					<img src="../../assets/img/logo/logo_tour.png" class="" width="150px" height="40px"  alt="">
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon" style="color: white">
 						<i class="fa fa-bars" style="color: white"></i>
 					</span>
-				</button>
+				</button> --}}
 				<button class="topbar-toggler more"><i class="fa fa-ellipsis-v"></i></button>
 				<div class="navbar-minimize">
 					<button class="btn btn-minimize btn-rounded">
@@ -85,153 +84,7 @@
 		</div>
 
 		<!-- Sidebar -->
-		<div class="sidebar" style="background-color: #fbfbfc">
-			
-			<div class="sidebar-background"></div>
-			<div class="sidebar-wrapper scrollbar-inner">
-				<div class="sidebar-content">
-					<div class="user">
-						<div class="avatar-sm float-left mr-2">
-							<i class="fa-solid fa-user fa-2x ml-1" style="color: #0E46A3"></i>
-						</div>
-						<div class="info">
-							
-						</div>
-					</div>
-					<ul class="nav">
-						
-						@if (auth()->user()->id_role == 1)
-						<li class="nav-item">
-							<a href="{{ 'dashboard' }}">
-								<i class="fas fa-home" style="color: #0E46A3"></i>
-								<p style="color: #1E0342">Dashboard</p>
-							</a>
-						</li>
-						<li class="nav-section">
-							<span class="sidebar-mini-icon">
-								<i class="fa fa-ellipsis-h"></i>
-							</span>
-							<h4 class="text-section" style="color: #1E0342">Main</h4>
-						</li>
-						<li class="nav-item">
-							<a data-toggle="collapse" href="#charts">
-								<i class="fa-solid fa-users" style="color: #0E46A3"></i>
-								<p style="color: #1E0342">Data Peserta</p>
-								<span class="caret"></span>
-							</a>
-							<div class="collapse" id="charts">
-								<ul class="nav nav-collapse">
-									<li>
-										<a href="{{ route('pelanggan') }}">
-											<span class="sub-item" style="color: #1E0342">SMAN 03</span>
-										</a>
-									</li>
-									<li>
-										<a href="{{ route('pelanggan_pgii') }}">
-											<span class="sub-item" style="color: #1E0342">SMAN PGII</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li class="nav-item">
-							<a href="{{ route('panitia') }}">
-								<i class="fas fa-solid fa-user-pen" style="color: #0E46A3"></i>
-								<p style="color: #1E0342">Panitia</p>
-							</a>
-						</li>
-						
-						<li class="nav-item">
-							<a href="{{ route('registrasi') }}">
-								<i class="fa-solid fa-camera" style="color: #0E46A3"></i>
-								<p style="color: #1E0342">Registrasi</p>
-							</a>
-						</li>
-					
-						<li class="nav-item">
-							<a href="{{ route('tour') }}">
-								<i class="fas fa-solid fa-globe" style="color: #0E46A3"></i>
-								<p style="color: #1E0342">Data Tour</p>
-							</a>
-						</li>
-						{{-- <li class="nav-item">
-							<a href="{{ route('daftar_hadir') }}">
-								<i class="far fa-regular fa-address-book" style="color: #0E46A3"></i>
-								<p style="color: #1E0342">Daftar Hadir</p>
-							</a>
-						</li> --}}
-						{{-- <li class="nav-item">
-							<a data-toggle="collapse" href="#charts">
-								<i class="far fa-chart-bar" style="color: #0E46A3"></i>
-								<p style="color: #1E0342">Laporan</p>
-								<span class="caret"></span>
-							</a>
-							<div class="collapse" id="charts">
-								<ul class="nav nav-collapse">
-									<li>
-										<a href="{{ route('laporan_peserta') }}">
-											<span class="sub-item" style="color: #1E0342">Laporan Peserta</span>
-										</a>
-									</li>
-									<li>
-										<a href="{{ route('laporan_data_tour') }}">
-											<span class="sub-item" style="color: #1E0342">Laporan Data Tour</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</li> --}}
-							@endif
 
-						@if (auth()->user()->id_role == 2)
-						<li class="nav-item">
-							<a data-toggle="collapse" href="#charts">
-								<i class="fa-solid fa-users" style="color: #0E46A3"></i>
-								<p style="color: #1E0342">Data Peserta</p>
-								<span class="caret"></span>
-							</a>
-							<div class="collapse" id="charts">
-								<ul class="nav nav-collapse">
-									<li>
-										<a href="{{ route('pelanggan') }}">
-											<span class="sub-item" style="color: #1E0342">SMAN 03</span>
-										</a>
-									</li>
-									<li>
-										<a href="{{ route('pelanggan_pgii') }}">
-											<span class="sub-item" style="color: #1E0342">SMAN PGII</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-
-						<li class="nav-item">
-							<a href="{{ route('registrasi') }}">
-								<i class="fa-solid fa-camera" style="color: #0E46A3"></i>
-								<p style="color: #1E0342">Registrasi</p>
-							</a>
-						</li>
-					
-						<li class="nav-item">
-							<a href="{{ route('tour') }}">
-								<i class="fas fa-solid fa-globe" style="color: #0E46A3"></i>
-								<p style="color: #1E0342">Data Tour</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="{{ route('daftar_hadir') }}">
-								<i class="far fa-regular fa-address-book" style="color: #0E46A3"></i>
-								<p style="color: #1E0342">Daftar Hadir</p>
-							</a>
-						</li>
-						@endif
-						     </li>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
 		<!-- End Sidebar -->
 
     @yield('content')

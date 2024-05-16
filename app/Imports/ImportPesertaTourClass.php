@@ -17,9 +17,8 @@ class ImportPesertaTourClass implements ToModel
         return new Peserta([
             'nama_peserta' => $row[1],
             'kelas' => $row[2],
-            'no_telepon' => $row[3],
-            'no_peserta_tour' => $row[4],
-            'no_bus_kendaraan' => $row[5],
+            'no_peserta_tour' => $row[3],
+            'id_tour' => $row[4],
         ]);    
     }
 }
